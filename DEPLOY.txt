@@ -1,0 +1,37 @@
+PUT THE SEQUENCE ANALYZER ONLINE (free, using GitHub + Render)
+
+A. GITHUB (stores your code)
+ 1. Make a free account at github.com and sign in.
+ 2. Click + (top right) > New repository. Name it seq-analyzer. Choose Public. Click Create repository.
+ 3. Click "uploading an existing file". Drag in EVERYTHING from this folder
+    (app.py, matcher.py, build_database.py, sequence_analyzer.py, requirements.txt,
+    .gitignore, README.txt, and the whole static folder). Do NOT upload a .venv folder.
+ 4. Click Commit changes. Check that app.py is listed at the TOP of the repository.
+
+B. RENDER (runs your app on the internet)
+ 5. Make a free account at render.com. Choose "Sign in with GitHub".
+ 6. Click New + > Web Service > pick your seq-analyzer repository > Connect.
+ 7. Fill in:
+      Language / Runtime : Python 3
+      Build Command      : pip install -r requirements.txt && python build_database.py
+      Start Command      : gunicorn app:app
+      Instance Type      : Free
+ 8. Click Create Web Service. Watch the log. The first build takes a few minutes.
+    When you see "Your service is live", click the address at the top (yourname.onrender.com).
+ 9. Test it: click the Protein example. You should see database matches.
+
+ If the build fails and the log mentions biopython: remove the line "biopython" from
+ requirements.txt on GitHub and let it redeploy. The app still works, just slower.
+
+C. GOOGLE (so people can find it)
+10. Go to search.google.com/search-console. Click Add property > URL prefix and paste your Render address.
+11. Choose the "HTML tag" verification method. Google shows a line starting <meta name="google-site-verification" ...
+12. On GitHub, open static/index.html, click the pencil icon, paste that line just below the <title> line,
+    and Commit. Wait for Render to redeploy (about a minute).
+13. Back in Search Console click Verify.
+14. At the top, paste your address into the search bar (URL inspection) and click Request indexing.
+15. Wait. New sites often take days to weeks to show up in Google.
+
+NOTES
+- Free Render apps go to sleep when idle. The first visit afterwards can take a minute to wake up.
+- To update the site later: edit the file on GitHub and commit. Render redeploys by itself.
